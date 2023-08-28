@@ -1,98 +1,43 @@
-server:
-  port: 12001
-  servlet:
-    context-path: /westudy/api/v1
-
+machine:
+  datacenter-id: 0
+  worker-id: 0
 
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-
-
 spring:
   shardingsphere:
-    mode:
-      type: Memory
     datasource:
-      #数据库名称（可以与数据库中的库名不一致）
       names: ds0
       ds0:
         type: com.alibaba.druid.pool.DruidDataSource
-        driverClassName: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://xxx:3306/oauth_role?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&useTimezone=true&tinyInt1isBit=false
+        driverClassName: org.h2.Driver
+        url: jdbc:h2:mem:oauth_role;INIT=RUNSCRIPT FROM 'classpath:db/init.sql'
         username: root
-        password: "root"
-        #        # 数据库连接池的最小连接数
+        password:
         min-idle: 2
-        # 初始化连接数
         initial-size: 1
-        # 最大连接数
         max-total: 5
         max-wait-millis: 200
         connectProperties: { connectionInitSqls: SET NAMES utf8mb4 }
-    #        connectionInitSqls: SET NAMES utf8mb4  #让 druid 支持特殊字符 加上shardingsphere会报错
     rules:
-      defaultDatabaseStrategy:
-        inline:
-          sharding-column: id
-          algorithm-expression: ds0
-      defaultKeyGenerateStrategy:
-        type: MyShardingKeyGenerator
-        column: id
-#      tables:
-#        #逻辑表名，这里的user为逻辑表名，user_info_0,user_info_1,user_info_2为实际表
-#        sys_user:
-#          actual-data-nodes: ds0.sys_user_$->{0..1}
-#          key-generator:
-#            #id使用雪花算法
-#            column: id
-#            #雪花算法
-#            type: MyShardingKeyGenerator
-#          table-strategy:
-#            inline:
-#              sharding-column: id
-#              algorithm-expression: sys_user_$->{id % 2}
-#        sys_user_role:
-#          actual-data-nodes: ds0.sys_user_role_$->{0..1}
-#          key-generator:
-#            #id使用雪花算法
-#            column: user_id
-#            #雪花算法
-#            type: MyShardingKeyGenerator
-#          table-strategy:
-#            inline:
-#              sharding-column: user_id
-#              algorithm-expression: sys_user_role_$->{user_id % 2}
-#        user_oss_record:
-#          actual-data-nodes: ds0.user_oss_record_$->{0..1}
-#          key-generator:
-#            #id使用雪花算法
-#            column: user_id
-#            #雪花算法
-#            type: MyShardingKeyGenerator
-#          table-strategy:
-#            inline:
-#              sharding-column: user_id
-#              algorithm-expression: user_oss_record_$->{user_id % 2}
-#        user_info:
-#          actual-data-nodes: ds0.user_info_$->{0..1}
-#          key-generator:
-#            #id使用雪花算法
-#            column: user_id
-#            #雪花算法
-#            type: MyShardingKeyGenerator
-#          table-strategy:
-#            inline:
-#              sharding-column: user_id
-#              algorithm-expression: user_info_$->{user_id % 2}
-
-#      default-table-strategy:
-#        inline:
-#          sharding-column: id
-#          algorithm-expression: ds0
-
-
-
-
-
+      sharding:
+        default-database-strategy:
+          standard:
+            sharding-column: id
+            sharding-algorithm-name: custom_inline
+        default-key-generate-strategy:
+          column: id
+          key-generator-name: custom_key_generator
+        key-generators:
+          custom_key_generator:
+            type: MyShardingKeyGenerator
+            props:
+              custom_datacenter_id: ${machine.datacenter-id}
+              custom_worker_id: ${machine.worker-id}
+        sharding-algorithms:
+          custom_inline:
+            type: INLINE
+            props:
+              algorithm-expression: ds0

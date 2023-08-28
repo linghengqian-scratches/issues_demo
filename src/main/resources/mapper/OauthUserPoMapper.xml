@@ -1,65 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ingsha.application.app.mysql.dao.OauthUserDao">
-    <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.ingsha.application.app.mysql.entity.OauthUserPo">
         <id column="id" property="id"/>
         <result column="identify_id" property="identifyId"/>
-        <result column="nickname" property="nickname"/>
-        <result column="phone_number" property="phoneNumber"/>
-        <result column="age" property="age"/>
-        <result column="sex" property="sex"/>
-        <result column="avatar" property="avatar"/>
-        <result column="background_image" property="backgroundImage"/>
-        <result column="website" property="website"/>
-        <result column="address" property="address"/>
-        <result column="signature" property="signature"/>
-        <result column="password" property="password"/>
-        <result column="following_count" property="followingCount"/>
-        <result column="follower_count" property="followerCount"/>
-        <result column="last_modify_identify_id" property="lastModifyIdentifyId"/>
-        <result column="online_status" property="onlineStatus"/>
-        <result column="lock_status" property="lockStatus"/>
-        <result column="un_access_permission" property="unAccessPermission"/>
-        <result column="create_time" property="createTime"/>
-        <result column="create_user_id" property="createUserId"/>
-        <result column="update_time" property="updateTime"/>
-        <result column="update_user_id" property="updateUserId"/>
         <result column="delete_status" property="deleteStatus"/>
-        <result column="delete_time" property="deleteTime"/>
-        <result column="delete_user_id" property="deleteUserId"/>
-        <result column="remark" property="remark"/>
     </resultMap>
 
-    <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         <!--@sql select -->
         id,
         identify_id,
-        nickname,
-        phone_number,
-        age,
-        sex,
-        avatar,
-        background_image,
-        website,
-        address,
-        signature,
-        `password`,
-        following_count,
-        follower_count,
-        last_modify_identify_id,
-        online_status,
-        lock_status,
-        un_access_permission,
-        create_time,
-        create_user_id,
-        update_time,
-        update_user_id,
         delete_status,
-        delete_time,
-        delete_user_id,
-        remark
         <!--@sql from oauth_user-->
     </sql>
 
