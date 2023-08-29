@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
-@org.mybatis.spring.annotation.MapperScan(basePackages = "com.ingsha.application.app.dao")
+@org.mybatis.spring.annotation.MapperScan(basePackages = "com.ingsha.application.app.mysql.dao")
 public class UserMapperScan {
 
 
