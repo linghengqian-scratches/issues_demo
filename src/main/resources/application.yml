@@ -3,17 +3,11 @@ server:
   servlet:
     context-path: /westudy/api/v1
 
-swagger:
-  prefix: ""
-
 
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-machine:
-  datacenter-id: 0
-  worker-id: 1
 
 
 spring:
