@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: dev,shardingsphere-dev
+    #    active: pro,shardingsphere-pro
+  #    active: test,shardingsphere-test
+
+  application:
+    name: app
+machine:
+  datacenter-id: 0
+  worker-id: 1
+
+  ## actuator暴露接口的前缀
+  #management:
+  #  context-path: /oauth
+  #  # actuator暴露接口使用的端口，为了和api接口使用的端口进行分离
+  #  port: 8888
+  #  security:
+  #    enabled: true
+  #    roles: SUPERUSER
+
+
+
+
+
+
+
+

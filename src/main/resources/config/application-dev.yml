@@ -1,0 +1,20 @@
+server:
+  port: 12001
+  servlet:
+    context-path: /westudy/api/v1
+
+swagger:
+  prefix: ""
+
+spring:
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+
+
+
